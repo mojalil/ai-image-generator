@@ -18,7 +18,9 @@ const PromptInput = ({ prompt, onSubmit }: PromptInputProps) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button className="" type="submit">
+        <button className={`p-4 ${input ? 'bg-violet-500 text-white transition-colors duration-200' : ' text-gray-300 cursor-not-allowed'} `} 
+        type="submit" 
+        disabled={!input}>
           Generate
         </button>
         <button
