@@ -1,9 +1,14 @@
+
+// If running locally for dev, use dev url otherwise use production url
+const devUrl = 'http://localhost:7071/api/getChatGPTSuggestion';
+const prodUrl = 'https://gpt-suggestion.azurewebsites.net/api/getChatGPTSuggestion';
+const url = process.env.NODE_ENV === 'production' ? prodUrl : devUrl;
+
+
 export async function GET(request: Request) {
-
-
     // Connect to microsoft azure endpont
-    const response = await fetch('https://api.openai.com/v1/engines/davinci/completions', {
-        cache: 'no-cache',
+    const response = await fetch(url, {
+        cache: 'no-store',
 })
 
 
