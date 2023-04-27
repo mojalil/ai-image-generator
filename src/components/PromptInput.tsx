@@ -22,6 +22,8 @@ const PromptInput = ({ prompt, onSubmit }: PromptInputProps) => {
     revalidateOnFocus: false,
   });
 
+  console.log(suggestion, error, isLoading, isValidating);
+
   return (
     <div className="m-10">
       <form className="flex flex-col lg:flex-row shadow-slate-400/10 border rounded-md lg:divide-x">

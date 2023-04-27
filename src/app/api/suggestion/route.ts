@@ -1,23 +1,32 @@
-
 // If running locally for dev, use dev url otherwise use production url
-const devUrl = 'http://localhost:7071/api/getChatGPTSuggestion';
-const prodUrl = 'https://gpt-suggestion.azurewebsites.net/api/getChatGPTSuggestion';
-const url = process.env.NODE_ENV === 'production' ? prodUrl : devUrl;
+// const devUrl = "http://localhost:7071/api/getChatGPTSuggestion";
+
+// const devUrl = "http://localhost:7071/api/getChatGPTSuggestion"
+
+//  replace localhost with ip of localhost
+
+const devUrl = "http://127.0.0.1:7071/api/getChatGPTSuggestion"
+
+const testUrl = "http://localhost:3000/api/alive"
+
+const url = devUrl
 
 
 export async function GET(request: Request) {
-    // Connect to microsoft azure endpont
+
+    console.log("GET request received")
+  // Connect to endpont and get response from GPT-3
+
     const response = await fetch(url, {
-        cache: 'no-store',
-})
+        cache: "no-cache",
+    })
 
-
-    const textData = await response.json();
-
-    // turn json to string
-    const text = JSON.stringify(textData.trim());
+    const text = await response.text();
 
     return new Response(text, {
-        status: 200})
-  }
-  
+        status: 200,
+    });
+
+
+}
+
