@@ -18,12 +18,14 @@ export async function GET(request: Request) {
   // Connect to endpont and get response from GPT-3
 
     const response = await fetch(url, {
-        cache: "no-cache",
+        cache: "no-store",
     })
 
-    const text = await response.text();
+    const text = await response.text()
 
-    return new Response(text, {
+    console.log("Response from GPT-3: ", text)
+
+    return new Response(JSON.stringify(text), {
         status: 200,
     });
 

@@ -22,7 +22,7 @@ const PromptInput = ({ prompt, onSubmit }: PromptInputProps) => {
     revalidateOnFocus: false,
   });
 
-  console.log(suggestion, error, isLoading, isValidating);
+  console.log(suggestion)
 
   return (
     <div className="m-10">
