@@ -63,6 +63,16 @@ const PromptInput = ({ prompt, onSubmit }: PromptInputProps) => {
           New Suggestion
         </button>
       </form>
+      {
+        input && (
+          <p className="italic pt-2 pl-2 font-light">
+            Suggestion: {" "}
+            <span className="text-violet-500">
+              {loading ? loadingText : suggestion}
+            </span>
+          </p>
+        )
+      }
     </div>
   );
 };
