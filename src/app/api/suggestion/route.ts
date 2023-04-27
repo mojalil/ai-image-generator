@@ -21,7 +21,7 @@ export async function GET(request: Request) {
         cache: "no-store",
     })
 
-    const text = await response.text()
+    const text = await (await response.text()).trim()
 
     console.log("Response from GPT-3: ", text)
 

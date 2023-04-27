@@ -24,11 +24,16 @@ const PromptInput = ({ prompt, onSubmit }: PromptInputProps) => {
 
   console.log(suggestion)
 
+  const loading = isLoading || isValidating;
+  const loadingText = "Thinking of a suggestion ..."
+
   return (
     <div className="m-10">
       <form className="flex flex-col lg:flex-row shadow-slate-400/10 border rounded-md lg:divide-x">
         <textarea
-          placeholder="What do you want?"
+          placeholder={
+            (loading && loadingText) ||
+            suggestion || "Start typing..."}
           className="flex-1 p-4 outline-none rounded-md"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -53,6 +58,7 @@ const PromptInput = ({ prompt, onSubmit }: PromptInputProps) => {
         <button
           className="p-4 bg-white text-violet-400 border-none transition-colors duration-200 rounded-b-md md:rounded-r-md md:rounded-bl-none font-bold"
           type="button"
+          onClick={mutate}
         >
           New Suggestion
         </button>
