@@ -25,8 +25,6 @@ app.http("generateImage", {
 
     const image_url = response.data.data[0].url;
 
-    console.log(`Image URL: ${image_url}`)
-
     const res = await axios.get(image_url, {
       responseType: "arraybuffer",
     });
@@ -59,5 +57,7 @@ app.http("generateImage", {
       console.log("Error uploading image");
       console.log(error);
     }
+
+    return { body: `Sucessfully uploaded image: ${file_name} with url ${image_url}` };
   },
 });

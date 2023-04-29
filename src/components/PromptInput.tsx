@@ -1,16 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import fetchSuggestionFromChatGPT from "../../lib/fetchSuggestionFromChatGPT";
 import useSWR from "swr";
 
-type PromptInputProps = {
-  prompt: string;
-  onSubmit: (value: string) => void;
-};
 
-const PromptInput = ({ prompt, onSubmit }: PromptInputProps) => {
-  const [input, setInput] = useState(prompt);
+const PromptInput = () => {
+  const [input, setInput] = useState("");
 
   const {
     data: suggestion,
@@ -27,9 +23,37 @@ const PromptInput = ({ prompt, onSubmit }: PromptInputProps) => {
   const loading = isLoading || isValidating;
   const loadingText = "Thinking of a suggestion ..."
 
+  const submitPrompt = async (useSuggestion?: boolean) => {
+    const inputPrompt = input;
+    setInput("");
+
+    console.log("submitting prompt", inputPrompt)
+
+    const p = useSuggestion ? suggestion : inputPrompt;
+
+    const res = await fetch("/api/generateImage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: p }),
+    });
+
+    const data = await res.json();
+
+    console.log("data", data)
+    
+  };
+
+  const handleSubmit =  async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await submitPrompt();
+  };
+
   return (
     <div className="m-10">
-      <form className="flex flex-col lg:flex-row shadow-slate-400/10 border rounded-md lg:divide-x">
+      <form className="flex flex-col lg:flex-row shadow-slate-400/10 border rounded-md lg:divide-x"
+      onSubmit={handleSubmit}>
         <textarea
           placeholder={
             (loading && loadingText) ||
@@ -52,6 +76,7 @@ const PromptInput = ({ prompt, onSubmit }: PromptInputProps) => {
         <button
           className="p-4 bg-violet-400 text-white transition-colors duration-20 font-bold disabled:text-gray-300 disabled:cursor-not-allowed disabled:bg-gray-400"
           type="button"
+          onClick={() => submitPrompt(true)}
         >
           Use Suggestion
         </button>
