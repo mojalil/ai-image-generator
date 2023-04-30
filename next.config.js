@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ['avatars.githubusercontent.com', 'seeklogo.com']
+    domains: ['avatars.githubusercontent.com', 'seeklogo.com', 'aiimagegeneratormo328ffc.blob.core.windows.net']
 }
 }
 
