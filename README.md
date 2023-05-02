@@ -2,8 +2,8 @@
 
 This project is an image generator built using Next.js 13, DALL·E, and GPT-3.5.
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/yourusername/projectname)
-[![Twitter Follow](https://img.shields.io/twitter/follow/yourtwitterhandle?style=social)](https://twitter.com/yourtwitterhandle)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/mojalil/ai-image-generator)
+[![Twitter Follow](https://img.shields.io/twitter/follow/motypes?style=social)](https://twitter.com/@motypes)
 
 ## Table of Contents
 
