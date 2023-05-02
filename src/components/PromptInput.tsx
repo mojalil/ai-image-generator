@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import fetchSuggestionFromChatGPT from "../../lib/fetchSuggestionFromChatGPT";
 import useSWR from "swr";
 import fetchImages from "../../lib/fetchImages";
+import { toast } from "react-hot-toast";
 
 const PromptInput = () => {
   const [input, setInput] = useState("");
@@ -35,6 +36,17 @@ const PromptInput = () => {
 
     const p = useSuggestion ? suggestion : inputPrompt;
 
+    const notificationPrompt = p
+    const notificationPromptShort = notificationPrompt?.slice(0, 20);
+
+
+    const notification = toast.loading(
+      `Generating image for: ${notificationPromptShort}...`
+    );
+
+    console.log("🚨 🚨 🚨 notification");
+    console.log(notification);
+
     const res = await fetch("/api/generateImage", {
       method: "POST",
       headers: {
@@ -45,10 +57,16 @@ const PromptInput = () => {
 
     const data = await res.json();
 
-    console.log("data", data);
+    if (data.error) {
+      toast.error(data.error, { id: notification });
+      return;
+    } else {
+      toast.success(`Generated image for: ${notificationPromptShort}`, {
+        id: notification,
+      });
 
-    console.log("updating images");
-    updateImages();
+      updateImages();
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
