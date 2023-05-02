@@ -1,29 +1,33 @@
-import PromptInput from '@/components/PromptInput'
-import '../styles/globals.css'
-import Header from '@/components/Header'
+import PromptInput from "@/components/PromptInput";
+import "../styles/globals.css";
+import Header from "@/components/Header";
+import ClientProvider from "@/components/ClientProvider";
+
 export const metadata = {
-  title: 'AI Image Generator',
-  description: 'An image generator using various AI tools including Chat GPT',
-}
+  title: "AI Image Generator",
+  description: "An image generator using various AI tools including Chat GPT",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body>
-        {/* Header */}
-        <Header />
+        <ClientProvider>
+          {/* Header */}
+          <Header />
 
-        {/* Prompt Input */}
-        <PromptInput></PromptInput>
+          {/* Prompt Input */}
+          <PromptInput></PromptInput>
 
-        {/* Main Content */}
+          {/* Main Content */}
 
-        {children}
+          {children}
+        </ClientProvider>
       </body>
     </html>
-  )
+  );
 }
