@@ -1,4 +1,5 @@
 
+
 const devUrl = "http://127.0.0.1:7071/api/getChatGPTSuggestion"
 const prodUrl = "https://ai-image-generator-mo.azurewebsites.net/api/getchatgptsuggestion"
 
