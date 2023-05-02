@@ -9,12 +9,16 @@ This project is an image generator built using Next.js 13, DALL·E, and GPT-3.5.
 
 <div style="display:flex; align-items:center;">
 <img src="https://user-images.githubusercontent.com/10572843/235681069-4ac15be7-f6e6-4643-b472-00987864f5ee.png" alt="AI image Generator" width="200" height="auto" style="margin-right: 20px;">
-<ol style="flex-grow:1;">
+</br>
+<div style="flex-grow:1;">
+<p> Follow these steps </p>
+<ol >
     <li>Clone the repository</li>
     <li>Install dependencies with `npm install`</li>
     <li>Run the development server with `npm run dev`</li>
     <li>Visit `http://localhost:3000` in your web browser</li>
 </ol>
+</div>
 </div>
 
 
