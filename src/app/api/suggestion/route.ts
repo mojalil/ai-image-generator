@@ -1,16 +1,9 @@
-// If running locally for dev, use dev url otherwise use production url
-// const devUrl = "http://localhost:7071/api/getChatGPTSuggestion";
-
-// const devUrl = "http://localhost:7071/api/getChatGPTSuggestion"
-
-//  replace localhost with ip of localhost
 
 const devUrl = "http://127.0.0.1:7071/api/getChatGPTSuggestion"
+const prodUrl = "https://ai-image-generator-mo.azurewebsites.net/api/getchatgptsuggestion"
 
-const testUrl = "http://localhost:3000/api/alive"
-
-const url = devUrl
-
+// Check environment if running locally use devUrl else use prodUrl
+const url = process.env.NODE_ENV === "development" ? devUrl : prodUrl
 
 export async function GET(request: Request) {
 
