@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import fetchSuggestionFromChatGPT from "../../lib/fetchSuggestionFromChatGPT";
 import useSWR from "swr";
-
+import fetchImages from "../../lib/fetchImages";
 
 const PromptInput = () => {
   const [input, setInput] = useState("");
@@ -18,16 +18,20 @@ const PromptInput = () => {
     revalidateOnFocus: false,
   });
 
-  console.log(suggestion)
+  const { mutate: updateImages } = useSWR("/api/images", fetchImages, {
+    revalidateOnFocus: false,
+  });
+
+  console.log(suggestion);
 
   const loading = isLoading || isValidating;
-  const loadingText = "Thinking of a suggestion ..."
+  const loadingText = "Thinking of a suggestion ...";
 
   const submitPrompt = async (useSuggestion?: boolean) => {
     const inputPrompt = input;
     setInput("");
 
-    console.log("submitting prompt", inputPrompt)
+    console.log("submitting prompt", inputPrompt);
 
     const p = useSuggestion ? suggestion : inputPrompt;
 
@@ -41,23 +45,27 @@ const PromptInput = () => {
 
     const data = await res.json();
 
-    console.log("data", data)
-    
+    console.log("data", data);
+
+    console.log("updating images");
+    updateImages();
   };
 
-  const handleSubmit =  async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await submitPrompt();
   };
 
   return (
     <div className="m-10">
-      <form className="flex flex-col lg:flex-row shadow-slate-400/10 border rounded-md lg:divide-x"
-      onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col lg:flex-row shadow-slate-400/10 border rounded-md lg:divide-x"
+        onSubmit={handleSubmit}
+      >
         <textarea
           placeholder={
-            (loading && loadingText) ||
-            suggestion || "Start typing..."}
+            (loading && loadingText) || suggestion || "Start typing..."
+          }
           className="flex-1 p-4 outline-none rounded-md"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -88,16 +96,14 @@ const PromptInput = () => {
           New Suggestion
         </button>
       </form>
-      {
-        input && (
-          <p className="italic pt-2 pl-2 font-light">
-            Suggestion: {" "}
-            <span className="text-violet-500">
-              {loading ? loadingText : suggestion}
-            </span>
-          </p>
-        )
-      }
+      {input && (
+        <p className="italic pt-2 pl-2 font-light">
+          Suggestion:{" "}
+          <span className="text-violet-500">
+            {loading ? loadingText : suggestion}
+          </span>
+        </p>
+      )}
     </div>
   );
 };
