@@ -30,7 +30,7 @@ To get started with this project, follow these steps:
 
 To use the image generator, simply enter a text prompt and click "Generate Image". The generator will use DALL·E and GPT-3.5 to create an image based on your input.
 
-![AI image Generator](https://user-images.githubusercontent.com/10572843/235681069-4ac15be7-f6e6-4643-b472-00987864f5ee.png)
+![AI Image Generator Desktop View](https://user-images.githubusercontent.com/10572843/235859694-33152d95-9493-45f0-96e8-476d3cd2412e.png)
 
 ## Contributions
 
